@@ -34,12 +34,13 @@ $("#loginBtn").click(function () {
         url: '/Token',
         data: loginData
     }).done(function (data) {
+        console.log("sessionStorage", sessionStorage);
+        console.log("data", data);
         console.log("self", self);
+        //self.user(data.userName);
+        //Cache the access token in session storage.
+        sessionStorage.setItem('tokenKey', data.access_token);
         console.log("sessionStorage", sessionStorage);
         console.log("tokenKey", tokenKey);
-        console.log("data", data);
-        self.user(data.userName);
-        //Cache the access token in session storage.
-        sessionStorage.setItem(tokenKey, data.access_token);
     }).fail(showError);
 });
