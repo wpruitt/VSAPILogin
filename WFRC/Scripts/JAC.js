@@ -41,6 +41,6 @@ $("#loginBtn").click(function () {
         //Cache the access token in session storage.
         sessionStorage.setItem('tokenKey', data.access_token);
         console.log("sessionStorage", sessionStorage);
-        console.log("tokenKey", tokenKey);
+        console.log('tokenKey', tokenKey);
     }).fail(showError);
 });
