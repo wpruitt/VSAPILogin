@@ -13,6 +13,11 @@
         DOB: $("#registerDOB").val(),
         PhoneNumber: $("#registerPhoneNumber").val()
     };
+    var regLogData = {
+        grant_type: 'password',
+        username: $("#registerEmail").val(),
+        password: $("#registerPassword").val()
+    };
     console.log("registerData", registerData);
     console.log("data-stringify", JSON.stringify(registerData));
     $.ajax({
@@ -21,7 +26,17 @@
         contentType: 'application/json; charset=utf-8',
         data: JSON.stringify(registerData)
     }).done(function (data) {
-        console.log("Done!");
+        console.log("Registered!");
+        $.ajax({
+            type: 'POST',
+            url: '/Token',
+            data: regLogData
+        }).done(function (data) {
+            sessionStorage.setItem('tokenKey', data.access_token);
+            console.log('and logged in')
+        }).fail(function (error) {
+            console.log('error', error);
+        });
     }).fail(function (error) {
         console.log('error', error);
     })
