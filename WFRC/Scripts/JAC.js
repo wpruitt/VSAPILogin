@@ -1,4 +1,4 @@
-﻿$("#registerBtn").click(function() {
+﻿$("#registerForm").submit(function(e) {
     var registerData = {
         Email: $("#registerEmail").val(),
         Password: $("#registerPassword").val(),
@@ -18,6 +18,7 @@
         username: $("#registerEmail").val(),
         password: $("#registerPassword").val()
     };
+    e.preventDefault();
     console.log("registerData", registerData);
     console.log("data-stringify", JSON.stringify(registerData));
     $.ajax({
@@ -33,7 +34,8 @@
             data: regLogData
         }).done(function (data) {
             sessionStorage.setItem('tokenKey', data.access_token);
-            console.log('and logged in')
+            console.log('and logged in');
+            console.log('here is where redirect will go');
         }).fail(function (error) {
             console.log('error', error);
         });
@@ -43,12 +45,13 @@
 });
 
 
-$("#loginBtn").click(function () {
+$("#loginForm").submit(function (e) {
     var loginData = {
         grant_type: 'password',
         username: $("#loginEmail").val(),
         password: $("#loginPassword").val()
     };
+    e.preventDefault();
     console.log("Clicked");
     console.log("loginData",loginData);
     $.ajax({
@@ -64,6 +67,7 @@ $("#loginBtn").click(function () {
         sessionStorage.setItem('tokenKey', data.access_token);
         console.log("sessionStorage", sessionStorage);
         console.log('tokenKey', sessionStorage.tokenKey);
+        console.log('here is where redirect will go');
     }).fail(function (error) {
         console.log('error', error);
     })
